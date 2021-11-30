@@ -143,16 +143,14 @@ class Escavador(object):
     def autoatualização(self, verbose=True):
         """Pesquisa preços e registra todo dia ao meio dia.
         """
-        def job(verbose):
-            if verbose:
-                print("Vasculhando os preços...")
+        def job():
+            print("Vasculhando os preços...")
             self.atualiza_preços(verbose=verbose)
-            if verbose:
-                print("Salvando os resultados...")
+            print("Salvando os resultados...")
             self.sarava()
             print("Preços atualizados!\n\n")
         
-        job(verbose)
+        job()
         schedule.every().day.at("12:00").do(job)
         while True:
             schedule.run_pending()
